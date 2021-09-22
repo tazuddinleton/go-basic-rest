@@ -12,7 +12,7 @@ import (
 
 var Log zerolog.Logger
 
-func Configure(conf conf.Config) *os.File {
+func Configure(conf conf.Configuration) *os.File {
 
 	l := conf.Logging()
 	var writers []io.Writer

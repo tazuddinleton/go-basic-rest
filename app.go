@@ -9,7 +9,9 @@ import (
 
 func main() {
 	c := conf.New()
-	file := logger.Configure(*c)
+	file := logger.Configure(c)
+
 	defer file.Close()
-	fmt.Println(c)
+
+	fmt.Println(*c)
 }

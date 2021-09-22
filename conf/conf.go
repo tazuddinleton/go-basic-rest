@@ -8,42 +8,60 @@ import (
 
 const configFilePath string = "config.json"
 
-type Config struct {
-	Name       string
-	Version    string
-	ConfigData ConfigData
+type Configuration interface {
+	Logging() logging
+	Db() db
 }
 
-func (c Config) Logging() Logging {
-	return c.ConfigData.Logging
+type db struct {
 }
 
-type ConfigData struct {
-	Name    string  `json:"name"`
-	Version string  `json:"version"`
-	Logging Logging `json:"logging"`
+func (c config) Logging() logging {
+	return c.logging
 }
 
-type Logging struct {
+func (c config) Db() db {
+	return c.db
+}
+
+type config struct {
+	Name    string
+	Version string
+	logging logging
+	db      db
+}
+
+type configData struct {
+	Name       string  `json:"name"`
+	Version    string  `json:"version"`
+	LoggingDef logging `json:"logging"`
+	DbDef      db      `json:"db"`
+}
+
+type logging struct {
 	Level          string `json:"level"`
 	File           string `json:"file"`
 	ConsoleEnabled bool   `json:"consoleEnabled"`
 }
 
 // New returns new Config object
-func New() *Config {
+func New() *config {
 	data := readData()
-	return &Config{
-		data.Name, data.Version, data,
+	return &config{
+		Name:    data.Name,
+		Version: data.Version,
+		logging: data.LoggingDef,
+		db:      data.DbDef,
 	}
 }
-func readData() ConfigData {
+
+func readData() configData {
 	bytes, err := ioutil.ReadFile(configFilePath)
 
 	if err != nil {
 		dlog.Fatal("Failed to read config.json")
 	}
-	var c ConfigData
+	var c configData
 	err = json.Unmarshal(bytes, &c)
 
 	if err != nil {
@@ -52,6 +70,6 @@ func readData() ConfigData {
 	return c
 }
 
-func (c *Config) String() string {
+func (c *configData) String() string {
 	return c.Name + ", Version: " + c.Version
 }

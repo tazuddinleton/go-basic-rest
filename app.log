@@ -1,6 +1,1 @@
-{"level":"info","time":1632293126,"message":"logger created"}
-{"level":"debug","time":1632293127,"message":"Hello world"}
-{"level":"debug","time":1632293127,"message":"hello world"}
-{"level":"info","time":1632293127,"message":"info log"}
-{"level":"debug","time":1632293128,"message":"debug log"}
-{"level":"error","time":1632293128,"message":"error log"}
+{"level":"info","time":1632295717,"message":"logger created"}
