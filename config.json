@@ -1,4 +1,9 @@
 {
     "name": "Basic rest api in go",
-    "version": "0.0.1"
+    "version": "0.0.1",
+    "logging": {
+        "level": "DEBUG",
+        "file": "app.log",
+        "consoleEnabled": false
+    }
 }
