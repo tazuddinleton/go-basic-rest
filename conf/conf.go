@@ -2,47 +2,12 @@ package conf
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	dlog "log"
 )
 
 const configFilePath string = "config.json"
-
-type Configuration interface {
-	Logging() logging
-	Db() db
-}
-
-type db struct {
-}
-
-func (c config) Logging() logging {
-	return c.logging
-}
-
-func (c config) Db() db {
-	return c.db
-}
-
-type config struct {
-	Name    string
-	Version string
-	logging logging
-	db      db
-}
-
-type configData struct {
-	Name       string  `json:"name"`
-	Version    string  `json:"version"`
-	LoggingDef logging `json:"logging"`
-	DbDef      db      `json:"db"`
-}
-
-type logging struct {
-	Level          string `json:"level"`
-	File           string `json:"file"`
-	ConsoleEnabled bool   `json:"consoleEnabled"`
-}
 
 // New returns new Config object
 func New() *config {
@@ -53,6 +18,19 @@ func New() *config {
 		logging: data.LoggingDef,
 		db:      data.DbDef,
 	}
+}
+
+// Logging returns logging configuration object
+func (c config) Logging() logging {
+	return c.logging
+}
+
+// Db returns database configuration object
+func (c config) Db() db {
+	return c.db
+}
+func (db db) ConnString() string {
+	return fmt.Sprintf("%s:%s@tcp(%s:%d)/%s", db.User, db.Password, db.Host, db.Port, db.Database)
 }
 
 func readData() configData {

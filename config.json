@@ -4,6 +4,13 @@
     "logging": {
         "level": "DEBUG",
         "file": "app.log",
-        "consoleEnabled": false
+        "consoleEnabled": true
+    },
+    "db": {
+        "user": "root",
+        "password": "Pass@123",
+        "host": "taz.ibfd.org",
+        "port": 3307,
+        "database": "rest_db"
     }
 }
