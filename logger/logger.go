@@ -12,6 +12,7 @@ import (
 
 var Log zerolog.Logger
 
+// Configure configures the logger and returns handle to log file if loging to file is enabled
 func Configure(conf conf.Configuration) *os.File {
 
 	l := conf.Logging()

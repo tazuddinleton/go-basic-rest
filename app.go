@@ -8,9 +8,11 @@ import (
 
 func main() {
 	c := conf.New()
-	file := logger.Configure(c)
-	defer file.Close()
+	lf := logger.Configure(c)
+	defer lf.Close()
 	db := db.New(c.Db())
 	defer db.Close()
 
+
+	
 }

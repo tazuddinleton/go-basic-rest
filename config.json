@@ -11,6 +11,6 @@
         "password": "Pass@123",
         "host": "taz.ibfd.org",
         "port": 3307,
-        "database": "rest_db"
+        "database": "location_db"
     }
 }
