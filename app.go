@@ -13,6 +13,4 @@ func main() {
 	db := db.New(c.Db())
 	defer db.Close()
 
-
-	
 }
